@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="alpaka" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-Cc-M1K">
+                                <rect key="frame" x="157.66666666666666" y="259" width="78" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Submit"/>
+                                <connections>
+                                    <action selector="submitQuestion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zer-Mr-hnB"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="What is your purpose?" borderStyle="roundedRect" placeholder="enter your question here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CVY-5b-QFS">
+                                <rect key="frame" x="0.0" y="59" width="393" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="kG4-sR-Za1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ymu-Wk-iVy">
+                                <rect key="frame" x="0.0" y="294" width="393" height="264"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CVY-5b-QFS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1ii-HQ-02R"/>
+                            <constraint firstItem="MV4-Cc-M1K" firstAttribute="centerX" secondItem="CVY-5b-QFS" secondAttribute="centerX" id="7bj-Xv-eJB"/>
+                            <constraint firstItem="Ymu-Wk-iVy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Flp-Z3-VJY"/>
+                            <constraint firstItem="CVY-5b-QFS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GCP-qF-kNG"/>
+                            <constraint firstItem="Ymu-Wk-iVy" firstAttribute="top" secondItem="MV4-Cc-M1K" secondAttribute="bottom" id="Jhy-wE-z96"/>
+                            <constraint firstItem="MV4-Cc-M1K" firstAttribute="top" secondItem="CVY-5b-QFS" secondAttribute="bottom" id="XHD-zY-PFt"/>
+                            <constraint firstItem="Ymu-Wk-iVy" firstAttribute="centerX" secondItem="CVY-5b-QFS" secondAttribute="centerX" id="dRC-rc-bog"/>
+                            <constraint firstItem="CVY-5b-QFS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="l84-gk-bCb"/>
+                            <constraint firstItem="Ymu-Wk-iVy" firstAttribute="width" secondItem="CVY-5b-QFS" secondAttribute="width" id="olL-na-vdQ"/>
+                            <constraint firstItem="CVY-5b-QFS" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="uw7-y3-qCp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="answer" destination="Ymu-Wk-iVy" id="UXd-vU-2yz"/>
+                        <outlet property="question" destination="CVY-5b-QFS" id="uIM-VD-dpw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="127.48091603053435" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

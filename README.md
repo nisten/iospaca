@@ -55,6 +55,18 @@ cmake --build . --config Release
 - (You can add other launch options like `--n 8` as preferred onto the same line)
 - You can now type to the AI in the terminal and it will reply. Enjoy!
 
+
+## Building from Source (iOS)
+
+Navigate your XCode to the ios folder and open the alpaka.workspace.
+Fix the ggml-alpaca-7b-q4.bin location in your iOS settings or re-add your local bin file to that.
+
+You should find a very basic UI:
+![alpaca_on_ios.jpeg](alpaca_on_ios.jpeg)
+
+### Remarks:
+This iOS build will only run on iOS devices with more than 4 GB of RAM such as iPad Air M1.
+
 ## Credit
 
 This combines [Facebook's LLaMA](https://github.com/facebookresearch/llama), [Stanford Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html), [alpaca-lora](https://github.com/tloen/alpaca-lora) and [corresponding weights](https://huggingface.co/tloen/alpaca-lora-7b/tree/main) by Eric Wang (which uses [Jason Phang's implementation of LLaMA](https://github.com/huggingface/transformers/pull/21955) on top of Hugging Face Transformers), and [llama.cpp](https://github.com/ggerganov/llama.cpp) by Georgi Gerganov. The chat implementation is based on Matvey Soloviev's [Interactive Mode](https://github.com/ggerganov/llama.cpp/pull/61) for llama.cpp. Inspired by [Simon Willison's](https://til.simonwillison.net/llms/llama-7b-m2) getting started guide for LLaMA. [Andy Matuschak](https://twitter.com/andy_matuschak/status/1636769182066053120)'s thread on adapting this to 13B, using fine tuning weights by [Sam Witteveen](https://huggingface.co/samwit/alpaca13B-lora). 

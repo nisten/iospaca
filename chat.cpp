@@ -1,7 +1,7 @@
 #include "ggml.h"
 
 #include "utils.h"
-
+#include "chat.h"
 #include <cassert>
 #include <cmath>
 #include <cstdio>
@@ -27,6 +27,10 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_BOLD          "\x1b[1m"
+
+// global callbacks for iOS
+const void * g_callbackTarget;
+ResponseCallback g_callback;
 
 // determine number of model parts based on the dimension
 static const std::map<int, int> LLAMA_N_PARTS = {
@@ -85,6 +89,10 @@ struct llama_model {
     struct ggml_context * ctx;
     std::map<std::string, struct ggml_tensor *> tensors;
 };
+
+void printLog(const char * text) {
+    g_callback(g_callbackTarget, text);
+}
 
 // load the model's weights from a file
 bool llama_model_load(const std::string & fname, llama_model & model, gpt_vocab & vocab, int n_ctx) {
@@ -505,13 +513,16 @@ bool llama_model_load(const std::string & fname, llama_model & model, gpt_vocab 
                 //fprintf(stderr, "%42s - [%5d, %5d], type = %6s, %6.2f MB\n", name.data(), ne[0], ne[1], ftype == 0 ? "float" : "f16", ggml_nbytes(tensor)/1024.0/1024.0);
                 if (++n_tensors % 8 == 0) {
                     fprintf(stderr, ".");
+                    printLog(".");
                     fflush(stderr);
                 }
             }
 
             fprintf(stderr, " done\n");
+            printLog(" done\n");
 
             fprintf(stderr, "%s: model size = %8.2f MB / num tensors = %d\n", __func__, total_size/1024.0/1024.0, n_tensors);
+            
         }
 
         fin.close();
@@ -791,7 +802,11 @@ const char * llama_print_system_info(void) {
     return s.c_str();
 }
 
-int main(int argc, char ** argv) {
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+int run_cmain(int argc, char ** argv) { 
     ggml_time_init();
     const int64_t t_main_start_us = ggml_time_us();
 
@@ -1016,6 +1031,7 @@ int main(int argc, char ** argv) {
         if (!input_noecho) {
             for (auto id : embd) {
                 printf("%s", vocab.id_to_token[id].c_str());
+                printLog(vocab.id_to_token[id].c_str());
             }
             fflush(stdout);
         }
@@ -1111,3 +1127,22 @@ int main(int argc, char ** argv) {
 
     return 0;
 }
+
+void setResponseCallback(const void* target, ResponseCallback callback)
+{
+    g_callbackTarget = target;
+    g_callback = callback;
+    
+    g_callback(g_callbackTarget, "\n\nStart model...\n");
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+#if !(IOSBUILD)
+int main(int argc, char ** argv) {
+    return run_cmain(argc, argv);
+}
+#endif
+
